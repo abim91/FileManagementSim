@@ -25,6 +25,7 @@ public class RequestHandler {
             return;
         }
 
+        
         switch(command.getCommand()){
             case "help" ->{
                 tree.help();

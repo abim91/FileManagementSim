@@ -23,7 +23,9 @@ public class GeneralTree {
             
         }
     }
-
+    public GTNode getCurrentNode(){
+        return currentNode;
+    }
     public void printCurrentDirectory(){
         System.out.println(root);
     }

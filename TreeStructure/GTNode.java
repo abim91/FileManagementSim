@@ -18,6 +18,9 @@ public class GTNode{
      
     }
 
+    public boolean isAFile(){
+      return isAFile;
+    }
     public GTNode getParent(){
       return this;
     }

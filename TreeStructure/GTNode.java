@@ -1,4 +1,5 @@
 package TreeStructure;
+import java.time.LocalDateTime;
 import java.util.*;
 public class GTNode{
     private String name;
@@ -6,12 +7,15 @@ public class GTNode{
     private String fileExtension;
     private List<GTNode> children; //directories aka the folders
     private boolean isAFile;
+    private LocalDateTime timestamp; // Timestamp when the node is created
    // private GTNode parent;
 
     public GTNode(String name, boolean isAFile){
       //this.info = info;
       this.name = name;
       this.isAFile = true;
+       this.timestamp = LocalDateTime.now(); // Set the timestamp when the node is created
+      
       /*if(!isAFile){
         this.children = new ArrayList<>();
       }*/
@@ -31,8 +35,12 @@ public class GTNode{
       this.name = name;
       this.children = new ArrayList<>();
       this.isAFile = false;
+      this.timestamp = LocalDateTime.now(); // Set the timestamp when the node is created
      // this.parent = parent;
     }
+    public String formattedTimestamp() {
+      return timestamp.toString(); // You can customize this format if needed
+  }
 
     public void addChildren(GTNode c){
       children.add(c);
@@ -56,6 +64,7 @@ public class GTNode{
         for(GTNode i : children){
         System.out.println(i.name);
         //System.out.println("List child operation went successful");
+        System.out.println(i.name + " (Created at: " + i.formattedTimestamp() + ")");
       }
     }
 
@@ -75,7 +84,7 @@ public class GTNode{
 
     }
     public String toString(){
-      return "I am a node";
+      return "Node name: " + this.name + ", Created at: " + formattedTimestamp();
     }
     
 

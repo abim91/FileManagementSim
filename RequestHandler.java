@@ -25,7 +25,7 @@ public class RequestHandler {
             return;
         }
 
-        
+
         switch(command.getCommand()){
             case "help" ->{
                 tree.help();
@@ -54,8 +54,20 @@ public class RequestHandler {
 
 
             case "cd" ->{
-            //   ChangeDirectory change = new ChangeDirectory(command.getCurrentDNode());
-                tree.changeDirectory(command.getParameters()[1]);  
+                GTNode element = tree.getCurrentNode().validateExistance(command.getParameters()[1]);
+                if(element == null){
+                    System.out.println("This is not a valid address");
+                    return;
+                }
+                
+                if(element.isAFile()){
+                    System.out.println("Cannot move into a File.");
+                    return;
+                }
+
+                tree.changeDirectory(command.getParameters()[1]) ;
+                
+                //tree.changeDirectory(command.getParameters()[1].isAFile );  
             }
 
             case "up" ->{

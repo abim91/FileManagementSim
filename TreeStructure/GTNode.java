@@ -6,6 +6,7 @@ public class GTNode{
     private String fileExtension;
     private List<GTNode> children; //directories aka the folders
     private boolean isAFile;
+    private GTNode parent;
    // private GTNode parent;
 
     public GTNode(String name, boolean isAFile){
@@ -21,9 +22,6 @@ public class GTNode{
     public boolean isAFile(){
       return isAFile;
     }
-    public GTNode getParent(){
-      return this;
-    }
   
 
     public GTNode(String name){
@@ -34,6 +32,20 @@ public class GTNode{
      // this.parent = parent;
     }
 
+    public void setParent(GTNode parent){
+      this.parent = parent;
+     
+  }
+    public GTNode getParent(){
+      if(parent != null){
+          System.out.println(parent.getName());
+          return parent;
+          
+      }
+      
+      return this;
+      
+  }
     public void addChildren(GTNode c){
       children.add(c);
       System.out.println("Add child operation went successful");

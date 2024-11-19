@@ -17,7 +17,7 @@ public class Runner{
         RequestHandler handler = new RequestHandler();//must be outside so the inital root is added only once
         while(true){
             
-            System.out.print(">>");
+            System.out.print(">> " + handler.workingDirectory() ); //fix the working dir par
             String answer = scan.nextLine();
 
             String[] myArray = answer.split(" +");

@@ -8,7 +8,7 @@ import TreeStructure.GeneralTree;
 public class RequestHandler {
     
     private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd"};
-
+    String CurrentDir = "~";
 
 
    
@@ -55,6 +55,7 @@ public class RequestHandler {
 
             case "cd" ->{
                 GTNode element = tree.getCurrentNode().validateExistance(command.getParameters()[1]);
+                
                 if(element == null){
                     System.out.println("This is not a valid address");
                     return;
@@ -62,23 +63,27 @@ public class RequestHandler {
                 
                 if(element.isAFile()){
                     System.out.println("Cannot move into a File.");
-                    return;
+                    return ;
                 }
 
-                tree.changeDirectory(command.getParameters()[1]) ;
+                tree.changeDirectory(element) ;
+                CurrentDir = current.getName();
                 
-                //tree.changeDirectory(command.getParameters()[1].isAFile );  
+                
             }
 
             case "up" ->{
                 tree.moveUp();
+              //  CurrentDir = current.getName();
             }
        
         }
 
     }
 
-
+    public String workingDirectory(){
+        return CurrentDir;
+    }
     private boolean validateRequest(String request){
         for(String i : acceptableRequests){
             if(request.equals(i))

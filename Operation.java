@@ -26,6 +26,7 @@ public class Operation {
         return command;
     }
 
+  
 
     // Getter for parameters
     public String[] getParameters() {

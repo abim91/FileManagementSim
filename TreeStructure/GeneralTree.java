@@ -2,26 +2,29 @@ package TreeStructure;
 
 public class GeneralTree {
 //private GTNode root = new GTNode("~", null,null);
-    private GTNode root;
+ //   private final static GTNode root = new GTNode("~");
     private GTNode currentNode;
     private GTNode parent;
+    private GTNode root ;
     public GeneralTree(GTNode c){
+      
         this.currentNode = c;
+       // this.parent = null
         
     }
 
     //use 'isAfile' to create error when doing incorrect function to a file.
     public void insert(GTNode node){
-    
-        if(root == null){
+        currentNode.addChildren(node);
+    /*     if(root == null){
             
-            parent = null;
+         //   parent = null;
             this.root = new GTNode(node.getName());
         }
         else {
             currentNode.addChildren(node);
             
-        }
+        }*/
     }
     public GTNode getCurrentNode(){
         return currentNode;
@@ -53,25 +56,28 @@ public class GeneralTree {
         currentNode.listChildren();
     }
 
-    public void changeDirectory(String moveTo){
-        GTNode node = currentNode.validateExistance(moveTo);
+    public void changeDirectory(GTNode moveTo){ //possible error
+      //  GTNode node = currentNode.validateExistance(moveTo);
         
-        if(node != null){
-            this.parent = currentNode;
-            currentNode = node;
+        if(moveTo != null){
+            moveTo.setParent(currentNode);
+            currentNode = moveTo;
+            parent = currentNode.getParent();
         }
 
     }
 
+    
+   
 
     public void moveUp(){
         
         if(parent != null){
-            System.out.println("we get here");
-            currentNode = parent;
+            System.out.println("we are at"+ parent.getName());
+            currentNode = currentNode.getParent();
             parent = parent.getParent();
            
-        }
+        } 
     }
     
 

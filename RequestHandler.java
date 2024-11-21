@@ -32,9 +32,13 @@ public class RequestHandler {
             }
 
             case "mkDir" ->{
+                // Create a new directory and display its timestamp
+                GTNode newDir = new GTNode(command.getParameters()[1]);
+                tree.insert(newDir);
+                System.out.println("Directory '" + newDir.getName() + "' created at: " + newDir.formattedTimestamp());
             
 
-                tree.insert(new GTNode(command.getParameters()[1]));
+                
             }
 
             case "delete" ->{
@@ -47,9 +51,10 @@ public class RequestHandler {
                 tree.list();
             }
 
-            case "mkFile" ->{
-
-                tree.insert((new GTNode(command.getParameters()[1],true)));
+            case "mkFile" ->{GTNode newFile = new GTNode(command.getParameters()[1], true);
+                tree.insert(newFile);
+                System.out.println("File '" + newFile.getName() + "' created at: " + newFile.formattedTimestamp());
+            
             }
 
 
@@ -88,3 +93,4 @@ public class RequestHandler {
 
     }
 }
+

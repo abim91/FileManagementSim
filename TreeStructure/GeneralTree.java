@@ -29,6 +29,22 @@ public class GeneralTree {
     public void printCurrentDirectory(){
         System.out.println(root);
     }
+    public GTNode findNode(String nodeName) {
+        return findNodeRecursively(currentNode, nodeName);
+    }
+    private GTNode findNodeRecursively(GTNode currentNode, String nodeName) {
+        if (currentNode.getName().equals(nodeName)) {
+            return currentNode;
+        }
+        for (GTNode child : currentNode.getChildren()) {
+            GTNode foundNode = findNodeRecursively(child, nodeName);
+            if (foundNode != null) {
+                return foundNode; 
+            }
+        }
+        return null; 
+    }
+    
 
     public void remove(String... args){
         System.out.println(args[1]);

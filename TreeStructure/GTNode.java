@@ -1,100 +1,107 @@
 package TreeStructure;
+import java.time.LocalDateTime;
+import java.util.*;
+public class GTNode{
+    private String name;
+    private String info;
+    private String fileExtension;
+    private List<GTNode> children; //directories aka the folders
+    private boolean isAFile;
+    private LocalDateTime timestamp; // Timestamp when the node is created
+    private LocalDateTime lastModifiedTimestamp;
+   // private GTNode parent;
 
-public class GeneralTree {
-//private GTNode root = new GTNode("~", null,null);
-    private GTNode root;
-    private GTNode currentNode;
-    private GTNode parent;
-    public GeneralTree(GTNode c){
-        this.currentNode = c;
-        
+    public GTNode(String name, boolean isAFile){
+      //this.info = info;
+      this.name = name;
+      this.isAFile = true;
+      this.timestamp = LocalDateTime.now(); // Set the timestamp when the node is created
+      this.lastModifiedTimestamp = this.timestamp;
+      
+      /*if(!isAFile){
+        this.children = new ArrayList<>();
+      }*/
+     
     }
 
-    //use 'isAfile' to create error when doing incorrect function to a file.
-    public void insert(GTNode node){
+    public GTNode getParent(){
+      return this;
+    }
+    public List<GTNode> getChildren() {
+      return children; 
+  }
+  
+  
+
+    public GTNode(String name){
     
-        if(root == null){
-            
-            parent = null;
-            this.root = new GTNode(node.getName());
-        }
-        else {
-            currentNode.addChildren(node);
-            
-        }
-    }
-    public GTNode getCurrentNode(){
-        return currentNode;
-    }
-    public void printCurrentDirectory(){
-        System.out.println(root);
-    }
-    public GTNode findNode(String nodeName) {
-        return findNodeRecursively(currentNode, nodeName);
+      this.name = name;
+      this.children = new ArrayList<>();
+      this.isAFile = false;
+      this.timestamp = LocalDateTime.now(); // Set the timestamp when the node is created
+      this.lastModifiedTimestamp = this.timestamp;
+     // this.parent = parent;
     }
 
-    // Recursive method to find a node by name
-    private GTNode findNodeRecursively(GTNode currentNode, String nodeName) {
-        if (currentNode.getName().equals(nodeName)) {
-            return currentNode; // Return node if found
-        }
+    
+    public String formattedTimestamp() {
+      return timestamp.toString(); // You can customize this format if needed
+  }
+  public String formattedLastModifiedTimestamp() {
+    return lastModifiedTimestamp.toString(); // You can customize the format
+}
+public void setLastModifiedTimestamp() {
+  this.lastModifiedTimestamp = LocalDateTime.now(); // Update last modified time whenever changes happen
+}
 
-        // Recursively search the children
-        for (GTNode child : currentNode.getChildren()) {
-            GTNode foundNode = findNodeRecursively(child, nodeName);
-            if (foundNode != null) {
-                return foundNode; // Return node if found in the children
-            }
-        }
+    public void addChildren(GTNode c){
+      children.add(c);
+      setLastModifiedTimestamp();
+      System.out.println("Add child operation went successful");
+    }
 
-        return null; // Return null if the node is not found
+    public void removeChildren(String c){
+      if(children.size() == 0){
+        System.out.println("There is nothing to delete");
+      }
+      GTNode todelete = new GTNode(null,true);
+      for(GTNode i: children){
+        if(i.name.equals(c)){
+          todelete = i;;
+        }
+      }
+      children.remove(todelete);
+      setLastModifiedTimestamp();
+    }
+
+    public void listChildren(){
+        for(GTNode i : children){
+        System.out.println(i.name);
+        //System.out.println("List child operation went successful");
+        System.out.println(i.name + " (Created at: " + i.formattedTimestamp() + ")");
+      }
+    }
+
+    public GTNode validateExistance(String node){
+      for(GTNode i: children){
+        if( i.getName().equals(node)){
+          return i;
+        }
+      }
+      return null;
+    }
+    public String getName(){
+      return this.name;
+    }
+
+    public void addFile(String name){
+
+    }
+    public String toString(){
+      return "Node name: " + this.name + ", Created at: " + formattedTimestamp();
     }
     
-
-    public void remove(String... args){
-        System.out.println(args[1]);
-        currentNode.removeChildren(args[1]);
-    }
-
-    public void help(){
-        System.out.println("""
-                        Operation           Description
-                        __________          _____________
-                        mkDir <name>        Add a folder <name> in the current directory
-                        remove <name>       Remve <name> folder or file from the current Directory
-                        mkFile <name>       Add a file <name> in the current directory
-                        list                List all the files and directores in the current directory
-                        up                  Move Up the one level from the current directory
-                        cd <name>           Move from current directory to <name> directory
-                        help                List all the avaliable commands
-                        info                Lists the name, date created, and date last modified
-                            """);
-    }
-
-    public void list(String... args){
-        currentNode.listChildren();
-    }
-
-    public void changeDirectory(String moveTo){
-        GTNode node = currentNode.validateExistance(moveTo);
-        
-        if(node != null){
-            this.parent = currentNode;
-            currentNode = node;
-        }
-
-    }
-
-
-    public void moveUp(){
-        
-        if(parent != null){
-            System.out.println("we get here");
-            currentNode = parent;
-            parent = parent.getParent();
-           
-        }
-    }
+    
     
 
-} 
+  }

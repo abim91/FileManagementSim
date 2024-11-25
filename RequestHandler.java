@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd"};
+    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd","info"};
 
 
 

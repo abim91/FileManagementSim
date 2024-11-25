@@ -32,9 +32,9 @@ public class RequestHandler {
             }
 
             case "mkDir" ->{
-            
-
-                tree.insert(new GTNode(command.getParameters()[1]));
+                GTNode newDir = new GTNode(command.getParameters()[1]);
+                tree.insert(newDir);
+                System.out.println("Directory '" + newDir.getName() + "' created at: " + newDir.formattedTimestamp());
             }
 
             case "delete" ->{
@@ -48,8 +48,8 @@ public class RequestHandler {
             }
 
             case "mkFile" ->{
-
-                tree.insert((new GTNode(command.getParameters()[1],true)));
+                tree.insert(newFile);
+                System.out.println("File '" + newFile.getName() + "' created at: " + newFile.formattedTimestamp());
             }
 
 
@@ -72,6 +72,16 @@ public class RequestHandler {
 
             case "up" ->{
                 tree.moveUp();
+            }
+            case "info" -> {
+                String nodeName = command.getParameters()[1];
+                GTNode node = tree.findNode(nodeName);
+
+                if (node != null) {
+                    System.out.println("Name: " + node.getName());
+                    System.out.println("Created at: " + node.formattedTimestamp());
+                    System.out.println("Last modified at: " + node.formattedLastModifiedTimestamp());
+                } 
             }
        
         }

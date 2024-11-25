@@ -62,7 +62,8 @@ public class GeneralTree {
                         up                  Move Up the one level from the current directory
                         cd <name>           Move from current directory to <name> directory
                         help                List all the avaliable commands
-                            """);
+                        info                Lists the name, date created, and date last modified
+                           """);
     }
 
     public void list(String... args){

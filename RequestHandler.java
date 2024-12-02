@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd","info"};
+    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd","info","move"};
 
 
 
@@ -25,16 +25,20 @@ public class RequestHandler {
             return;
         }
 
-
+        
         switch(command.getCommand()){
             case "help" ->{
                 tree.help();
             }
 
             case "mkDir" ->{
+                // Create a new directory and display its timestamp
                 GTNode newDir = new GTNode(command.getParameters()[1]);
                 tree.insert(newDir);
                 System.out.println("Directory '" + newDir.getName() + "' created at: " + newDir.formattedTimestamp());
+            
+
+                
             }
 
             case "delete" ->{
@@ -47,27 +51,16 @@ public class RequestHandler {
                 tree.list();
             }
 
-            case "mkFile" ->{
+            case "mkFile" ->{GTNode newFile = new GTNode(command.getParameters()[1], true);
                 tree.insert(newFile);
                 System.out.println("File '" + newFile.getName() + "' created at: " + newFile.formattedTimestamp());
+            
             }
 
 
             case "cd" ->{
-                GTNode element = tree.getCurrentNode().validateExistance(command.getParameters()[1]);
-                if(element == null){
-                    System.out.println("This is not a valid address");
-                    return;
-                }
-                
-                if(element.isAFile()){
-                    System.out.println("Cannot move into a File.");
-                    return;
-                }
-
-                tree.changeDirectory(command.getParameters()[1]) ;
-                
-                //tree.changeDirectory(command.getParameters()[1].isAFile );  
+            //   ChangeDirectory change = new ChangeDirectory(command.getCurrentDNode());
+                tree.changeDirectory(command.getParameters()[1]);  
             }
 
             case "up" ->{
@@ -75,15 +68,17 @@ public class RequestHandler {
             }
             case "info" -> {
                 String nodeName = command.getParameters()[1];
-                GTNode node = tree.findNode(nodeName);
-
-                if (node != null) {
-                    System.out.println("Name: " + node.getName());
-                    System.out.println("Created at: " + node.formattedTimestamp());
-                    System.out.println("Last modified at: " + node.formattedLastModifiedTimestamp());
-                } 
+                tree.info(nodeName);
             }
-       
+            case "move" -> {
+                if (command.getParameters().length == 3) {
+                    String fileName = command.getParameters()[1];
+                    String targetDirName = command.getParameters()[2];
+                    tree.moveFile(fileName, targetDirName);
+                } else {
+                    System.out.println("Usage: move <file_name> <target_directory>");
+                }
+            }
         }
 
     }
@@ -98,3 +93,4 @@ public class RequestHandler {
 
     }
 }
+

@@ -10,7 +10,7 @@ public class Runner{
         System.out.println("*                  Simulator               *");
         System.out.println("*                                          *");
         System.out.println("*   Enter 'help' for a list of commands    *");
-        System.out.println("*            Enter 'Q' to exit.           *");
+        System.out.println("*            Enter 'Q' to exit.            *");
         System.out.println("*                                          *");
         System.out.println("********************************************");
 

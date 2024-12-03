@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","move","up","help","cd","info"};
+    private String[] acceptableRequests = {"mkDir","mkFile","remove","list","move","up","help","cd","info"};
     String CurrentDir = "~";
 
   
@@ -37,14 +37,14 @@ public class RequestHandler {
             
                 GTNode node = new GTNode(command.getParameters()[1]); 
                 tree.insert(node);
-            //    collection.add(node);
+          
             }
 
-            case "delete" ->{
+            case "remove" ->{
             
 
                 tree.remove(command.getParameters());
-             //   collection.remove(command);
+             
             }
 
             case "list" ->{
@@ -52,7 +52,7 @@ public class RequestHandler {
             }
 
             case "mkFile" ->{
-                System.out.println("asdas");
+                
                 tree.insert((new GTNode(command.getParameters()[1],true)));
             }
 

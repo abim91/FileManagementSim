@@ -36,8 +36,9 @@ public class GeneralTree {
     }
 
     public void remove(String... args){
-        System.out.println(args[1]);
+        
         currentNode.removeChildren(args[1]);
+        System.out.println(args[1]+ " is removed");
     }
 
     public void help(){
@@ -78,7 +79,7 @@ public class GeneralTree {
     public GTNode moveUp(){
         
         if(parent != null){
-            System.out.println("we are at"+ parent.getName());
+         //   System.out.println("we are at"+ parent.getName());
             parent = parent.getParent();
             currentNode = currentNode.getParent();
         } 
@@ -113,7 +114,7 @@ public class GeneralTree {
 
             // Check if it's a file and display its parent directory
             if (node.isAFile()) {
-                System.out.println("The paretn is + "+ node.getParent());
+              //  System.out.println("The paretn is + "+ node.getParent());
               //  GTNode parentDir = node.getParent();
                 if (node.getParent() != null) {
                     System.out.println("Located in directory: " + node.getParent().getName());

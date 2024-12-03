@@ -49,7 +49,7 @@ public class GTNode{
           return parent;
           
       }
-      System.out.println("parent is null");
+    //  System.out.println("parent is null");
       return this;
       
   }
@@ -59,7 +59,7 @@ public class GTNode{
 }
     public void addChildren(GTNode c){
       children.add(c);
-      System.out.println("Add child operation went successful");
+      System.out.println("successful");
     }
 
     public void removeChildren(String c){

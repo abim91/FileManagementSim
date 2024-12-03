@@ -45,12 +45,15 @@ public class GeneralTree {
                         Operation           Description
                         __________          _____________
                         mkDir <name>        Add a folder <name> in the current directory
-                        remove <name>       Remve <name> folder or file from the current Directory
                         mkFile <name>       Add a file <name> in the current directory
+                        remove <name>       Remve <name> folder or file from the current Directory
+                        cd <name>           Move from current directory to <name> directory
+                        move <file> <name>  Move file into directory <name>
+                        info <name>         Returns information about <name> file/directory
                         list                List all the files and directores in the current directory
                         up                  Move Up the one level from the current directory
-                        cd <name>           Move from current directory to <name> directory
                         help                List all the avaliable commands
+
                             """);
     }
 
@@ -76,9 +79,8 @@ public class GeneralTree {
         
         if(parent != null){
             System.out.println("we are at"+ parent.getName());
-            currentNode = currentNode.getParent();
             parent = parent.getParent();
-            
+            currentNode = currentNode.getParent();
         } 
         return currentNode;
     }
@@ -111,21 +113,47 @@ public class GeneralTree {
 
             // Check if it's a file and display its parent directory
             if (node.isAFile()) {
-                GTNode parentDir = node.getParent();
-                if (parentDir != null) {
-                    System.out.println("Located in directory: " + parentDir.getName());
+                System.out.println("The paretn is + "+ node.getParent());
+              //  GTNode parentDir = node.getParent();
+                if (node.getParent() != null) {
+                    System.out.println("Located in directory: " + node.getParent().getName());
                 } else {
                     System.out.println("This file has no parent (it's at the root level).");
                 }
             } else {
                 // If it's a directory, list its children
+                if(!node.isAFile()){
                 System.out.println("Contains the following items:");
+                
                 for (GTNode child : node.getChildren()) {
                     System.out.println("- " + child.getName());
                 }
             }
+            }
         } else {
             System.out.println("Node not found!");
         }
+    }
+
+    public void moveFile(String fileName, String targetDirName){
+        GTNode fileNode = findNode(fileName);
+        if (fileNode == null || !fileNode.isAFile()) {
+            System.out.println("File not found or it's not a file.");
+            return;
+        }
+        GTNode targetDirNode = findNode(targetDirName); // Find the target directory
+        if (targetDirNode == null || targetDirNode.isAFile()) {
+            System.out.println("Target directory not found or it is not a directory.");
+            return;
+        }
+
+        // Remove the file from the current directory and add it to the target directory
+        currentNode.removeChildren(fileName); // Remove from current directory
+        targetDirNode.addChildren(fileNode); // Add to the target directory
+
+        System.out.println("File '" + fileName + "' has been moved to directory '" + targetDirName + "'.");
+
+
+
     }
 } 

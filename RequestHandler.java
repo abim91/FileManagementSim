@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPassword","up","help","cd","info"};
+    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","move","up","help","cd","info"};
     String CurrentDir = "~";
 
   
@@ -87,6 +87,16 @@ public class RequestHandler {
               //  String nodeName = command.getParameters()[1];
                 
                 tree.info(command.getParameters()[1]);
+            }
+
+            case "move" -> {
+                if (command.getParameters().length == 3) {
+                    String fileName = command.getParameters()[1];
+                    String targetDirName = command.getParameters()[2];
+                    tree.moveFile(fileName, targetDirName);
+                } else {
+                    System.out.println("Usage: move <file_name> <target_directory>");
+                }
             }
        
         }

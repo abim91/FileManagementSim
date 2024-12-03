@@ -8,6 +8,7 @@ public class Operation {
     private GTNode currentObject;
     public Operation(String command){
         this.command = command;
+        
     }
 
 

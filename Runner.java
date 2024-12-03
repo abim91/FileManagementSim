@@ -4,12 +4,15 @@ public class Runner{
     public static final String ANSI_RESET = "\u001B[0m"; 
     public static final String ANSI_BLUE = "\u001B[34m"; 
     public static void main(String[] args) {
-        System.out.println("adsdsa");
-        System.out.println("""
-                            Welcome to File Management Simulator
-                            Enter 'help' to get a list of all commands,
-                            Enter Q to exit.
-                            """);
+            System.out.println("********************************************");
+        System.out.println("*                                          *");
+        System.out.println("*       Welcome to File Management         *");
+        System.out.println("*                  Simulator               *");
+        System.out.println("*                                          *");
+        System.out.println("*   Enter 'help' for a list of commands    *");
+        System.out.println("*            Enter 'Q' to exit.           *");
+        System.out.println("*                                          *");
+        System.out.println("********************************************");
 
         Scanner scan = new Scanner(System.in);
      

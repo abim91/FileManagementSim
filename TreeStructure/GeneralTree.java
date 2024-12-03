@@ -81,5 +81,29 @@ public class GeneralTree {
         return currentNode;
     }
     
+    public void info(GTNode node){
+        if (node != null) {
+            System.out.println("Name: " + node.getName());
+            System.out.println("Created at: " + node.formattedTimestamp());
+            System.out.println("Last modified at: " + node.formattedLastModifiedTimestamp());
 
+            // Check if it's a file and display its parent directory
+            if (node.isAFile()) {
+                GTNode parentDir = node.getParent();
+                if (parentDir != null) {
+                    System.out.println("Located in directory: " + parentDir.getName());
+                } else {
+                    System.out.println("This file has no parent (it's at the root level).");
+                }
+            } 
+            else {
+                // If it's a directory, list its children
+                System.out.println("Contains the following items:");
+                node.listChildren();
+            }
+        } else {
+            System.out.println("Node not found!");
+        }
+    
+    }
 } 

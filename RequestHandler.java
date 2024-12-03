@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPassword","up","help","cd"};
+    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPassword","up","help","cd","info"};
     String CurrentDir = "~";
 
 
@@ -76,6 +76,13 @@ public class RequestHandler {
             case "up" ->{
                 //tree.moveUp();
                 current = tree.moveUp();
+            }
+
+            case "info" -> {
+
+              //  String nodeName = command.getParameters()[1];
+                GTNode element = new GTNode(command.getParameters()[1]);
+                tree.info(element);
             }
        
         }

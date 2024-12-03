@@ -15,7 +15,7 @@ public class GTNode{
     public GTNode(String name, boolean isAFile){
       //this.info = info;
       this.name = name;
-      this.isAFile = true;
+      this.isAFile = isAFile;
       this.timestamp = LocalDateTime.now();
       this.lastModifiedTimestamp = this.timestamp;
       /*if(!isAFile){
@@ -25,7 +25,7 @@ public class GTNode{
     }
 
     public boolean isAFile(){
-      return isAFile;
+      return this.isAFile;
     }
   
 
@@ -53,6 +53,10 @@ public class GTNode{
       return this;
       
   }
+  
+  public List<GTNode> getChildren() {
+    return children;
+}
     public void addChildren(GTNode c){
       children.add(c);
       System.out.println("Add child operation went successful");
@@ -77,6 +81,7 @@ public class GTNode{
        
       }
     }
+    
 
     public GTNode validateExistance(String node){
       for(GTNode i: children){

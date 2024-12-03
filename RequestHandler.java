@@ -48,7 +48,7 @@ public class RequestHandler {
             }
 
             case "mkFile" ->{
-
+                System.out.println("asdas");
                 tree.insert((new GTNode(command.getParameters()[1],true)));
             }
 
@@ -81,8 +81,8 @@ public class RequestHandler {
             case "info" -> {
 
               //  String nodeName = command.getParameters()[1];
-                GTNode element = new GTNode(command.getParameters()[1]);
-                tree.info(element);
+                
+                tree.info(command.getParameters()[1]);
             }
        
         }

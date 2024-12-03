@@ -80,8 +80,28 @@ public class GeneralTree {
         } 
         return currentNode;
     }
-    
-    public void info(GTNode node){
+    public GTNode findNode(String nodeName) {
+        return findNodeRecursively(currentNode, nodeName);
+    }
+
+     private GTNode findNodeRecursively(GTNode currentNode, String nodeName) {
+        if (currentNode.getName().equals(nodeName)) {
+            return currentNode;
+        }
+
+        for (GTNode child : currentNode.getChildren()) {
+            GTNode foundNode = findNodeRecursively(child, nodeName);
+            if (foundNode != null) {
+                return foundNode;
+            }
+        }
+
+        return null; // Return null if not found
+    }
+
+    public void info(String nodeName) {
+        GTNode node = findNode(nodeName);
+
         if (node != null) {
             System.out.println("Name: " + node.getName());
             System.out.println("Created at: " + node.formattedTimestamp());
@@ -95,15 +115,15 @@ public class GeneralTree {
                 } else {
                     System.out.println("This file has no parent (it's at the root level).");
                 }
-            } 
-            else {
+            } else {
                 // If it's a directory, list its children
                 System.out.println("Contains the following items:");
-                node.listChildren();
+                for (GTNode child : node.getChildren()) {
+                    System.out.println("- " + child.getName());
+                }
             }
         } else {
             System.out.println("Node not found!");
         }
-    
     }
 } 

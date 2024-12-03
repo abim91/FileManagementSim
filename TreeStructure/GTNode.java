@@ -45,11 +45,11 @@ public class GTNode{
   }
     public GTNode getParent(){
       if(parent != null){
-          System.out.println(parent.getName());
+          System.out.println(parent.getName() + " parent isn't null");
           return parent;
           
       }
-      
+      System.out.println("parent is null");
       return this;
       
   }

@@ -15,16 +15,18 @@ public class GeneralTree {
 
     //use 'isAfile' to create error when doing incorrect function to a file.
     public void insert(GTNode node){
-        currentNode.addChildren(node);
-    /*     if(root == null){
+      //  currentNode.addChildren(node);
+         if(root == null){
             
          //   parent = null;
             this.root = new GTNode(node.getName());
         }
         else {
+
             currentNode.addChildren(node);
+            node.setParent(currentNode);
             
-        }*/
+        }
     }
     public GTNode getCurrentNode(){
         return currentNode;
@@ -83,7 +85,7 @@ public class GeneralTree {
     public GTNode findNode(String nodeName) {
         return findNodeRecursively(currentNode, nodeName);
     }
-
+//here
      private GTNode findNodeRecursively(GTNode currentNode, String nodeName) {
         if (currentNode.getName().equals(nodeName)) {
             return currentNode;
@@ -98,7 +100,7 @@ public class GeneralTree {
 
         return null; // Return null if not found
     }
-
+//end
     public void info(String nodeName) {
         GTNode node = findNode(nodeName);
 

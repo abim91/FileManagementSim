@@ -10,6 +10,8 @@ public class RequestHandler {
     private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPassword","up","help","cd","info"};
     String CurrentDir = "~";
 
+  
+
 
    
     GTNode current = new GTNode("~");
@@ -33,14 +35,16 @@ public class RequestHandler {
 
             case "mkDir" ->{
             
-
-                tree.insert(new GTNode(command.getParameters()[1]));
+                GTNode node = new GTNode(command.getParameters()[1]); 
+                tree.insert(node);
+            //    collection.add(node);
             }
 
             case "delete" ->{
             
 
                 tree.remove(command.getParameters());
+             //   collection.remove(command);
             }
 
             case "list" ->{

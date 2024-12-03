@@ -41,7 +41,7 @@ public class RequestHandler {
                 
             }
 
-            case "delete" ->{
+            case "remove" ->{
             
 
                 tree.remove(command.getParameters());

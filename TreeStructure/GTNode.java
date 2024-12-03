@@ -67,7 +67,7 @@ public class GTNode{
     public void listChildren(){
         for(GTNode i : children){
         System.out.println(i.name);
-        //System.out.println("List child operation went successful");
+       
       }
     }
 

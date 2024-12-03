@@ -70,14 +70,15 @@ public class GeneralTree {
     
    
 
-    public void moveUp(){
+    public GTNode moveUp(){
         
         if(parent != null){
             System.out.println("we are at"+ parent.getName());
             currentNode = currentNode.getParent();
             parent = parent.getParent();
-           
+            
         } 
+        return currentNode;
     }
     
 

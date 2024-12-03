@@ -7,7 +7,7 @@ import TreeStructure.GeneralTree;
 
 public class RequestHandler {
     
-    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPermission","up","help","cd"};
+    private String[] acceptableRequests = {"mkDir","mkFile","delete","list","setPassword","up","help","cd"};
     String CurrentDir = "~";
 
 
@@ -67,14 +67,15 @@ public class RequestHandler {
                 }
 
                 tree.changeDirectory(element) ;
-                CurrentDir = current.getName();
+                current = element;
+               
                 
                 
             }
 
             case "up" ->{
-                tree.moveUp();
-              //  CurrentDir = current.getName();
+                //tree.moveUp();
+                current = tree.moveUp();
             }
        
         }
@@ -82,8 +83,9 @@ public class RequestHandler {
     }
 
     public String workingDirectory(){
-        return CurrentDir;
+        return current.getName();
     }
+
     private boolean validateRequest(String request){
         for(String i : acceptableRequests){
             if(request.equals(i))
